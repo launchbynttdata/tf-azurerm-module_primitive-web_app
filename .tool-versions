@@ -8,3 +8,4 @@ terraform-docs 0.16.0
 terragrunt 0.39.2
 tflint 0.48.0
 python 3.11.5
+repo-tool v2.10.3-launch #https://github.com/launchbynttdata/asdf-repo-tool
