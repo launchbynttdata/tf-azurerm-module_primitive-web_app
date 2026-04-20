@@ -54,17 +54,6 @@ variable "instance_env" {
   }
 }
 
-variable "instance_resource" {
-  type        = number
-  description = "Number that represents the instance of the resource."
-  default     = 0
-
-  validation {
-    condition     = var.instance_resource >= 0 && var.instance_resource <= 100
-    error_message = "Instance number should be between 0 to 100."
-  }
-}
-
 variable "logical_product_family" {
   type        = string
   description = <<EOF
@@ -281,23 +270,6 @@ variable "site_config" {
     worker_count           = optional(number)
   })
   default = {}
-}
-
-variable "storage_account" {
-  description = "(Optional) One or more storage_account blocks."
-  type = list(object({
-    access_key   = string
-    account_name = string
-    name         = string
-    share_name   = string
-    type         = string
-    mount_path   = optional(string)
-  }))
-  default = null
-  validation {
-    condition     = var.storage_account == null || can(contains(["AzureFiles", "AzureBlob"], var.storage_account[*].type))
-    error_message = "storage_account.type must be one of AzureFiles or AzureBlob."
-  }
 }
 
 variable "identity" {
