@@ -283,22 +283,6 @@ variable "site_config" {
   default = {}
 }
 
-variable "storage_account" {
-  description = "(Optional) One or more storage_account blocks."
-  type = list(object({
-    access_key   = string
-    account_name = string
-    name         = string
-    share_name   = string
-    type         = string
-    mount_path   = optional(string)
-  }))
-  default = null
-  validation {
-    condition     = var.storage_account == null || can(contains(["AzureFiles", "AzureBlob"], var.storage_account[*].type))
-    error_message = "storage_account.type must be one of AzureFiles or AzureBlob."
-  }
-}
 
 variable "identity" {
   description = "(Optional) An identity block."

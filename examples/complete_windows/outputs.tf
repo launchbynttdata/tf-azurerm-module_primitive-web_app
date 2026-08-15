@@ -10,6 +10,10 @@
 # // See the License for the specific language governing permissions and
 # // limitations under the License.
 
+output "resource_group_name" {
+  value = module.resource_group.name
+}
+
 output "default_hostname" {
   value = module.web_app.web_app_default_hostname
 }

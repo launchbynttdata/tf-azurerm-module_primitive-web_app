@@ -23,11 +23,12 @@ module "resource_names" {
   cloud_resource_type     = each.value.name
   instance_env            = var.instance_env
   maximum_length          = each.value.max_length
+  instance_resource       = var.instance_resource
 }
 
 module "resource_group" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm"
-  version = "~> 1.0"
+  version = "~> 1.2"
 
   name     = local.resource_group_name
   location = var.location
@@ -37,7 +38,7 @@ module "resource_group" {
 
 module "storage_account" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/storage_account/azurerm"
-  version = "~> 1.0"
+  version = "~> 1.2"
 
   storage_account_name = local.storage_account_name
   resource_group_name  = module.resource_group.name

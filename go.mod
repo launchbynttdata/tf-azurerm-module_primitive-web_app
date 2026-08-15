@@ -7,7 +7,6 @@ require (
 	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/appservice/armappservice v1.0.0
 	github.com/gruntwork-io/terratest v0.47.2
 	github.com/launchbynttdata/lcaf-component-terratest v1.0.4
-	github.com/launchbynttdata/tf-azurerm-module_primitive-function_app v0.0.0-20241105205602-47c6d679aa61
 	github.com/stretchr/testify v1.9.0
 )
 
