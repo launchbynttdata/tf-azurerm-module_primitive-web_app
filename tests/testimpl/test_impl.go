@@ -32,7 +32,11 @@ func TestWebApp(t *testing.T, ctx types.TestContext) {
 		if err != nil {
 			return "", err
 		}
-		return strconv.FormatInt(int64(res.StatusCode), 10), nil
+		code := strconv.FormatInt(int64(res.StatusCode), 10)
+		if res.StatusCode != http.StatusOK {
+			return code, fmt.Errorf("web app returned HTTP %s, want 200", code)
+		}
+		return code, nil
 	})
 
 	assert.Equal(t, "200", status)
