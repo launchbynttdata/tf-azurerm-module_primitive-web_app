@@ -17,29 +17,21 @@ import (
 
 	"github.com/launchbynttdata/lcaf-component-terratest/lib"
 	"github.com/launchbynttdata/lcaf-component-terratest/types"
-	"github.com/launchbynttdata/tf-azurerm-module_primitive-function_app/tests/testimpl"
+	"github.com/launchbynttdata/tf-azurerm-module_primitive-web_app/tests/testimpl"
 )
 
 const (
-	testConfigsExamplesFolderDefault = "../../examples/private_func_app"
+	testConfigsExamplesFolderDefault = "../../examples/complete_linux"
 	infraTFVarFileNameDefault        = "test.tfvars"
 )
 
-func TestFunctionAppModule(t *testing.T) {
+func TestWebAppModule(t *testing.T) {
 
 	ctx := types.CreateTestContextBuilder().
 		SetTestConfig(&testimpl.ThisTFModuleConfig{}).
 		SetTestConfigFolderName(testConfigsExamplesFolderDefault).
 		SetTestConfigFileName(infraTFVarFileNameDefault).
-		SetTestSpecificFlags(map[string]types.TestFlags{
-			"complete_windows": {
-				"IS_TERRAFORM_IDEMPOTENT_APPLY": false,
-			},
-			"complete_linux": {
-				"IS_TERRAFORM_IDEMPOTENT_APPLY": false,
-			},
-		}).
 		Build()
 
-	lib.RunNonDestructiveTest(t, *ctx, testimpl.TestComposablePrivateFuncApp)
+	lib.RunNonDestructiveTest(t, *ctx, testimpl.TestComposableWebApp)
 }
