@@ -17,7 +17,7 @@ func TestWebApp(t *testing.T, ctx types.TestContext) {
 
 	// Empty App Service examples keep returning HTTP 503; rely on the Azure
 	// management-plane assertions in TestComposableWebApp instead of a public probe.
-	webAppHostname := terraform.Output(t, ctx.TerratestTerraformOptions(), "default_hostname")
+	webAppHostname := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "default_hostname")
 	assert.NotEmpty(t, webAppHostname)
 }
 
@@ -40,9 +40,9 @@ func TestComposableWebApp(t *testing.T, ctx types.TestContext) {
 	}
 
 	t.Run("TestDefaultHostName", func(t *testing.T) {
-		defaultHostname := terraform.Output(t, ctx.TerratestTerraformOptions(), "default_hostname")
-		resourceGroupName := terraform.Output(t, ctx.TerratestTerraformOptions(), "resource_group_name")
-		webAppName := terraform.Output(t, ctx.TerratestTerraformOptions(), "web_app_name")
+		defaultHostname := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "default_hostname")
+		resourceGroupName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "resource_group_name")
+		webAppName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "web_app_name")
 
 		azureWebApp, err := webAppClient.Get(context.Background(), resourceGroupName, webAppName, nil)
 		if err != nil {
@@ -52,9 +52,9 @@ func TestComposableWebApp(t *testing.T, ctx types.TestContext) {
 	})
 
 	t.Run("TestWebAppID", func(t *testing.T) {
-		resourceGroupName := terraform.Output(t, ctx.TerratestTerraformOptions(), "resource_group_name")
-		webAppName := terraform.Output(t, ctx.TerratestTerraformOptions(), "web_app_name")
-		webAppID := terraform.Output(t, ctx.TerratestTerraformOptions(), "web_app_id")
+		resourceGroupName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "resource_group_name")
+		webAppName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "web_app_name")
+		webAppID := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "web_app_id")
 
 		azureWebApp, err := webAppClient.Get(context.Background(), resourceGroupName, webAppName, nil)
 		if err != nil {
